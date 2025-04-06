@@ -1,0 +1,44 @@
+import { BrowserRouter as Router, Routes, Route, useNavigate, useParams, useLocation } from "react-router-dom";
+
+function Home() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Tela 1</h1>
+      <button 
+        className="px-4 py-2 bg-blue-500 text-white rounded-md"
+        onClick={() => navigate("/tela2/05433190?consulta=ativo")}
+      >
+        Tela 2
+      </button>
+    </div>
+  );
+}
+
+function Tela2() {
+  const { parametro } = useParams();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const consulta = query.get("consulta");
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Tela 2</h1>
+      {parametro && <p className="text-lg">ID do usuário: {parametro}</p>}
+      {consulta && <p className="text-lg">Status: {consulta}</p>}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Tela2" element={<Tela2 />} />
+        <Route path="/tela2/:parametro" element={<Tela2 />} />
+      </Routes>
+    </Router>
+  );
+}
