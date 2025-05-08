@@ -1,21 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function PaginaInicial() {
+function PaginaInicial({ idioma }) {
+  const textos = {
+    pt: { titulo: "Página Inicial", cadastrar: "Cadastrar Usuário", listar: "Lista de Usuários" },
+    en: { titulo: "Home", cadastrar: "Register User", listar: "User List" }
+  };
+
   return (
-    <div className="container mt-5">
-      <h1>Bem-vindo!</h1>
-      <div className="btn-group mt-3 d-flex flex-column align-items-start gap-2">
-        <Link to="/cadastro">
-          <button className="btn btn-primary">Cadastro</button>
-        </Link>
-        <Link to="/usuarios">
-          <button className="btn btn-secondary">Lista de Usuários</button>
-        </Link>
-        <Link to="/hooks">
-          <button className="btn btn-success">Verificar Hooks</button>
-        </Link>
-      </div>
+    <div className="container mt-5 text-center">
+      <h1>{textos[idioma].titulo}</h1>
+      <Link to="/cadastro" className="btn btn-primary m-2">{textos[idioma].cadastrar}</Link>
+      <Link to="/usuarios" className="btn btn-secondary m-2">{textos[idioma].listar}</Link>
     </div>
   );
 }
